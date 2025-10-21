@@ -49,6 +49,9 @@ type Pages = {
   "/account/orders": {
     params: {};
   };
+  "/account/profile": {
+    params: {};
+  };
   "/auth/register": {
     params: {};
   };
@@ -68,7 +71,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/about" | "/catalog" | "/catalog/p/:productSlug" | "/catalog/c/:categorySlug?" | "/catalog/files/*" | "/cart" | "/cart/add" | "/cart/checkout" | "/account" | "/account/orders" | "/auth/register" | "/auth/login" | "/auth/logout" | "/*";
+    page: "/" | "/about" | "/catalog" | "/catalog/p/:productSlug" | "/catalog/c/:categorySlug?" | "/catalog/files/*" | "/cart" | "/cart/add" | "/cart/checkout" | "/account" | "/account/orders" | "/account/profile" | "/auth/register" | "/auth/login" | "/auth/logout" | "/*";
   };
   "./routes/home.tsx": {
     id: "routes/home";
@@ -108,7 +111,7 @@ type RouteFiles = {
   };
   "./routes/account/_layout.tsx": {
     id: "routes/account/_layout";
-    page: "/account" | "/account/orders";
+    page: "/account" | "/account/orders" | "/account/profile";
   };
   "./routes/account/index.tsx": {
     id: "routes/account/index";
@@ -117,6 +120,10 @@ type RouteFiles = {
   "./routes/account/orders.tsx": {
     id: "routes/account/orders";
     page: "/account/orders";
+  };
+  "./routes/account/profile.tsx": {
+    id: "routes/account/profile";
+    page: "/account/profile";
   };
   "./routes/auth/register.tsx": {
     id: "routes/auth/register";

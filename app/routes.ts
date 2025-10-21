@@ -20,6 +20,7 @@ export default [
   route("account", "./routes/account/_layout.tsx", [
     index("./routes/account/index.tsx"),
     route("orders", "./routes/account/orders.tsx"),
+    route("profile", "./routes/account/profile.tsx"),
   ]),
 
   route("auth/register", "./routes/auth/register.tsx"),

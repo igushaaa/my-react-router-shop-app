@@ -7,6 +7,7 @@ import {
   Scripts,
   useNavigation,
 } from "react-router";
+import { clientMiddleware } from "./middleware/client";
 import "./app.css";
 
 import {
@@ -89,6 +90,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return <Outlet />;
 }
+
+export { clientMiddleware };
 
 // Глобальний fallback при гідратації
 export function HydrateFallback() {

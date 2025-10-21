@@ -1,6 +1,10 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
 
+export const prerender = () => {
+  return ["/"];
+};
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },

@@ -87,3 +87,28 @@ export default function CatalogIndex() {
 }
 
 export { ErrorBoundary };
+
+export function shouldRevalidate({ currentUrl, nextUrl, formMethod }: {
+  currentUrl: URL;
+  nextUrl: URL;
+  formMethod?: string;
+}) {
+  // Перезавантажуємо дані тільки якщо змінився пошуковий запит або сортування
+  const currentSearch = currentUrl.searchParams.get("q");
+  const nextSearch = nextUrl.searchParams.get("q");
+  const currentSort = currentUrl.searchParams.get("sort");
+  const nextSort = nextUrl.searchParams.get("sort");
+  
+  // Перезавантажуємо якщо змінився пошук або сортування
+  if (currentSearch !== nextSearch || currentSort !== nextSort) {
+    return true;
+  }
+  
+  // Перезавантажуємо після POST запитів (додавання товарів)
+  if (formMethod === "POST") {
+    return true;
+  }
+  
+  // Не перезавантажуємо для звичайних навігацій
+  return false;
+}
