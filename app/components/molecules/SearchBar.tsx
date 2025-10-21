@@ -1,5 +1,4 @@
-import Input from "../atoms/Input";
-import Button from "../atoms/Button";
+import { Input, Button } from "../atomic/atoms";
 
 export default function SearchBar({ q, sort }: { q?: string; sort?: string }) {
   return (

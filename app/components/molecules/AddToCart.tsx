@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useFetcher } from "react-router";
-import Button from "../atoms/Button";
+import { Button } from "../atomic/atoms";
 
 export default function AddToCart({ productId }: { productId: number }) {
   const fetcher = useFetcher<{ success?: boolean; error?: string }>();

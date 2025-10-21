@@ -1,5 +1,5 @@
-import ProductCard from "../molecules/ProductCard";
-import type { ProductCardProps } from "../molecules/ProductCard";
+import { ProductCard } from "../atomic/molecules";
+import type { ProductCardProps } from "../atomic/molecules";
 
 export default function ProductList({ items }: { items: ProductCardProps[] }) {
   return (
