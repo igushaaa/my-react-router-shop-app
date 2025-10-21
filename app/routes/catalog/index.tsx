@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router";
 import { PrismaClient } from "@prisma/client";
 import SearchBar from "../../components/molecules/SearchBar";
 import ProductList from "../../components/organisms/ProductList";
+import { ErrorBoundary } from "../../components/ErrorBoundary";
 
 const prisma = new PrismaClient();
 
@@ -84,3 +85,5 @@ export default function CatalogIndex() {
     </main>
   );
 }
+
+export { ErrorBoundary };

@@ -1,7 +1,17 @@
 import { PrismaClient } from "@prisma/client";
 import { useFetcher, useLoaderData, Link } from "react-router";
+import { ErrorBoundary } from "../../components/ErrorBoundary";
+import type { MetaFunction } from "react-router";
 
 const prisma = new PrismaClient() as any;
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Shopping Cart - React Router Shop" },
+    { name: "description", content: "Review your items and proceed to checkout" },
+    { name: "robots", content: "noindex, nofollow" }, // Private page
+  ];
+};
 
 export async function loader({ request }: { request: Request }) {
   // Отримуємо користувача для фільтрації
@@ -174,6 +184,20 @@ export default function CartPage() {
           ← Continue Shopping
         </Link>
       </p>
+    </main>
+  );
+}
+
+export { ErrorBoundary };
+
+export function HydrateFallback() {
+  return (
+    <main className="cart-container">
+      <h1 className="cart-header">Your Cart</h1>
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <span className="ml-3 text-gray-600">Loading cart...</span>
+      </div>
     </main>
   );
 }

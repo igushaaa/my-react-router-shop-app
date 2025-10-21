@@ -1,8 +1,17 @@
 import { PrismaClient } from "@prisma/client";
-import { useLoaderData, useFetcher } from "react-router";
+import { useLoaderData, useFetcher, useSubmit } from "react-router";
 import { getUser } from "../../auth.server";
+import type { MetaFunction } from "react-router";
 
 const prisma = new PrismaClient() as any;
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "My Orders - React Router Shop" },
+    { name: "description", content: "View and manage your order history" },
+    { name: "robots", content: "noindex, nofollow" }, // Private page
+  ];
+};
 
 export async function loader({ request }: { request: Request }) {
   const user = await getUser(request);
@@ -86,6 +95,7 @@ export default function OrdersPage() {
   }>();
 
   const fetcher = useFetcher();
+  const submit = useSubmit();
 
   if (orders.length === 0) {
     return (
@@ -163,17 +173,18 @@ export default function OrdersPage() {
               {/* Кнопка скасування для pending замовлень */}
               {order.status === "pending" && (
                 <div className="mt-4 pt-3 border-t">
-                  <fetcher.Form method="post" className="inline">
-                    <input type="hidden" name="intent" value="cancel" />
-                    <input type="hidden" name="orderId" value={order.id} />
-                    <button 
-                      type="submit" 
-                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-                      disabled={fetcher.state === "submitting"}
-                    >
-                      {fetcher.state === "submitting" ? "Cancelling..." : "Cancel Order"}
-                    </button>
-                  </fetcher.Form>
+                  <button 
+                    onClick={() => {
+                      submit(
+                        { intent: "cancel", orderId: order.id.toString() },
+                        { method: "post" }
+                      );
+                    }}
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                    disabled={fetcher.state === "submitting"}
+                  >
+                    {fetcher.state === "submitting" ? "Cancelling..." : "Cancel Order"}
+                  </button>
                 </div>
               )}
 
@@ -191,6 +202,18 @@ export default function OrdersPage() {
             </div>
           );
         })}
+      </div>
+    </section>
+  );
+}
+
+export function HydrateFallback() {
+  return (
+    <section>
+      <h2 className="text-lg font-medium mb-3">Your Orders</h2>
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <span className="ml-3 text-gray-600">Loading orders...</span>
       </div>
     </section>
   );

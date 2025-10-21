@@ -5,6 +5,7 @@ import {
   NavLink,
   ScrollRestoration,
   Scripts,
+  useNavigation,
 } from "react-router";
 import "./app.css";
 
@@ -44,6 +45,9 @@ export function ErrorBoundary() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
+
   return (
     <html lang="en">
       <head>
@@ -62,6 +66,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <NavLink to="/cart">Cart</NavLink>
           <NavLink to="/account">Account</NavLink>
         </nav>
+
+        {/* Global Loading Spinner */}
+        {isLoading && (
+          <div className="fixed top-0 left-0 right-0 z-50 bg-blue-600 text-white py-2 px-4 text-center">
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+              Loading...
+            </div>
+          </div>
+        )}
 
         {children}
 
