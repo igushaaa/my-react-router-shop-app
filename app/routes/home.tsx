@@ -9,5 +9,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return(
+    <div className="container">
+      <h1 className="page-title">Welcome</h1>
+      <p className="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem distinctio odit delectus. Consequuntur in fugit suscipit a cum aspernatur hic dolorum praesentium, facere recusandae iusto ea! Accusantium laboriosam voluptatibus vitae!</p>
+    </div>
+  ) ;
 }
