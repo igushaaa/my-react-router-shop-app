@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Text, Card } from "../atoms";
 
 export interface AuthLayoutProps {

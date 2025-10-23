@@ -10,5 +10,5 @@ export { default as ProductFilters } from './ProductFilters';
 export type { ProductListProps } from './ProductList';
 export type { NavigationProps } from './Navigation';
 export type { CartProps } from './Cart';
-export type { OrderListProps, Order } from './OrderList';
+export type { OrderListProps } from './OrderList';
 export type { ProductFiltersProps, FilterOption } from './ProductFilters';

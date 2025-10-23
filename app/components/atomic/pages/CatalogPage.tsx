@@ -1,6 +1,6 @@
 import { ProductPageLayout } from "../templates";
-import { ProductList, ProductFilters, SearchBar } from "../organisms";
-import { Text } from "../atoms";
+import { ProductList, ProductFilters } from "../organisms";
+import { SearchBar } from "../molecules";
 
 export interface CatalogPageProps {
   products: Array<{

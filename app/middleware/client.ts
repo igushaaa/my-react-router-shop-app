@@ -1,7 +1,7 @@
-import type { ClientMiddleware } from "react-router";
+type ClientMiddleware = (args: any) => any;
 
 // Логування навігації
-export const navigationLogger: ClientMiddleware = ({ request, response, context }) => {
+export const navigationLogger: ClientMiddleware = ({ request, response, context }: any) => {
   console.log(`🚀 Navigation: ${request.method} ${request.url}`);
   
   if (response) {
@@ -22,7 +22,7 @@ export const navigationLogger: ClientMiddleware = ({ request, response, context 
 };
 
 // Метрики продуктивності
-export const performanceMetrics: ClientMiddleware = ({ request, response, context }) => {
+export const performanceMetrics: ClientMiddleware = ({ request, response, context }: any) => {
   if (context.startTime) {
     const endTime = performance.now();
     const loadTime = endTime - context.startTime;
@@ -39,13 +39,13 @@ export const performanceMetrics: ClientMiddleware = ({ request, response, contex
 };
 
 // Аналітика користувача
-export const userAnalytics: ClientMiddleware = ({ request, response, context }) => {
+export const userAnalytics: ClientMiddleware = ({ request, response, context }: any) => {
   // Логуємо переходи між сторінками
   const pathname = new URL(request.url).pathname;
   
   // Відправляємо події аналітики (Google Analytics, Mixpanel, тощо)
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("config", "GA_MEASUREMENT_ID", {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    (window as any).gtag("config", "GA_MEASUREMENT_ID", {
       page_path: pathname,
     });
   }
@@ -59,12 +59,12 @@ export const userAnalytics: ClientMiddleware = ({ request, response, context }) 
 };
 
 // Обробка помилок
-export const errorHandler: ClientMiddleware = ({ request, response, context }) => {
+export const errorHandler: ClientMiddleware = ({ request, response, context }: any) => {
   if (response && !response.ok) {
     console.error(`❌ Request failed: ${response.status} ${response.statusText}`);
     
     // Відправляємо помилки на сервер для моніторингу
-    if (typeof window !== "undefined" && window.fetch) {
+    if (typeof window !== "undefined") {
       fetch("/api/errors", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -83,7 +83,7 @@ export const errorHandler: ClientMiddleware = ({ request, response, context }) =
 };
 
 // Комбінований middleware
-export const clientMiddleware: ClientMiddleware = (args) => {
+export const clientMiddleware: ClientMiddleware = (args: any) => {
   let result = navigationLogger(args);
   result = performanceMetrics(result);
   result = userAnalytics(result);
