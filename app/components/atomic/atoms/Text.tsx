@@ -3,7 +3,7 @@ import React from 'react';
 export interface TextProps {
   children: React.ReactNode;
   as?: 'p' | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '6xl';
   weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
   color?: 'primary' | 'secondary' | 'muted' | 'danger' | 'success' | 'warning';
   className?: string;
@@ -26,7 +26,8 @@ export default function Text({
     xl: 'text-xl',
     '2xl': 'text-2xl',
     '3xl': 'text-3xl',
-    '4xl': 'text-4xl'
+    '4xl': 'text-4xl',
+    '6xl': 'text-6xl'
   };
   
   const weightClasses = {

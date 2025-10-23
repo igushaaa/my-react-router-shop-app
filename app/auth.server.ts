@@ -25,6 +25,15 @@ export async function loader({ request }: { request: Request }) {
   return { user };
 }
 
+// 🚫 Middleware для перевірки авторизації
+export async function requireAuth(request: Request) {
+  const user = await getUser(request);
+  if (!user) {
+    throw Response.redirect(new URL("/auth/login", request.url));
+  }
+  return user;
+}
+
 // 🧹 Вихід (logout)
 export async function logout() {
   const expired = await sessionCookie.serialize("", { maxAge: 0 });

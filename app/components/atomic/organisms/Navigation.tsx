@@ -1,6 +1,5 @@
 import { NavLink, useNavigation } from "react-router";
 import { Text, Button } from "../atoms";
-import { getUser } from "../../auth.server";
 
 export interface NavigationProps {
   className?: string;
