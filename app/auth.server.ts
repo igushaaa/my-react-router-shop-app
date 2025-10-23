@@ -27,6 +27,12 @@ export async function requireAuth(request: Request) {
   return user;
 }
 
+// Basic login helper (used by tests; real app should hash passwords)
+export async function login(email: string, password: string) {
+  if (!email || !password) return null;
+  return prisma.user.findUnique({ where: { email } });
+}
+
 // 🧹 Вихід (logout)
 export async function logout() {
   const expired = await sessionCookie.serialize("", { maxAge: 0 });

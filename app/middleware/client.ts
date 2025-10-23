@@ -63,20 +63,18 @@ export const errorHandler: ClientMiddleware = ({ request, response, context }: a
   if (response && !response.ok) {
     console.error(`❌ Request failed: ${response.status} ${response.statusText}`);
     
-    // Відправляємо помилки на сервер для моніторингу
-    if (typeof window !== "undefined") {
-      fetch("/api/errors", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          url: request.url,
-          status: response.status,
-          timestamp: new Date().toISOString(),
-        }),
-      }).catch(() => {
-        // Ігноруємо помилки відправки помилок
-      });
-    }
+    // Відправляємо помилки на сервер для моніторингу (виконується на клієнті)
+    fetch("/api/errors", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: request.url,
+        status: response.status,
+        timestamp: new Date().toISOString(),
+      }),
+    }).catch(() => {
+      // Ігноруємо помилки відправки помилок
+    });
   }
   
   return { request, response, context };

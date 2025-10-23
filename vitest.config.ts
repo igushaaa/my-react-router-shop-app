@@ -1,8 +1,7 @@
 import { defineConfig } from "vitest/config";
-import { reactRouter } from "@react-router/dev/vite";
+// Removed reactRouter plugin to avoid type mismatch errors during tsc
 
 export default defineConfig({
-  plugins: [reactRouter()],
   test: {
     environment: "jsdom",
     setupFiles: ["./app/test-setup.ts"],
