@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import Button from "../atoms/Button";
+import { Button } from "../atomic/atoms";
 import AddToCart from "./AddToCart";
 
 export type ProductCardProps = {
