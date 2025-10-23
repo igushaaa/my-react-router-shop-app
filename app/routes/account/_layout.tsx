@@ -1,5 +1,6 @@
 import { Outlet, Link, useLoaderData } from "react-router";
 import { getUser } from "../../auth.server";
+import { ErrorBoundary } from "../../components/ErrorBoundary";
 
 export async function loader({ request }: { request: Request }) {
   const user = await getUser(request);
@@ -45,13 +46,7 @@ export default function AccountLayout() {
   );
 }
 
-export function ErrorBoundary() {
-  return (
-    <div className="text-center mt-10 text-red-500">
-      Something went wrong in your account section.
-    </div>
-  );
-}
+export { ErrorBoundary };
 
 export function HydrateFallback() {
   return (

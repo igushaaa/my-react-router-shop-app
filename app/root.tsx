@@ -7,43 +7,8 @@ import {
   Scripts,
   useNavigation,
 } from "react-router";
-import { clientMiddleware } from "./middleware/client";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import "./app.css";
-
-import {
-  isRouteErrorResponse,
-  useRouteError,
-} from "react-router";
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div className="h-screen flex flex-col items-center justify-center text-center text-red-600">
-        <h1 className="text-4xl font-bold">{error.status}</h1>
-        <p className="mt-2 text-lg">{error.statusText}</p>
-        <p className="mt-1">{error.data}</p>
-      </div>
-    );
-  } else if (error instanceof Error) {
-    return (
-      <div className="h-screen flex flex-col items-center justify-center text-center text-red-600">
-        <h1 className="text-3xl font-bold">Unexpected Error</h1>
-        <p className="mt-2">{error.message}</p>
-        <pre className="bg-gray-100 text-left p-4 rounded mt-4">
-          {error.stack}
-        </pre>
-      </div>
-    );
-  } else {
-    return (
-      <div className="text-center text-red-600 mt-20">
-        Unknown error occurred.
-      </div>
-    );
-  }
-}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigation = useNavigation();
@@ -91,7 +56,6 @@ export default function App() {
   return <Outlet />;
 }
 
-export { clientMiddleware };
 
 // Глобальний fallback при гідратації
 export function HydrateFallback() {

@@ -1,7 +1,7 @@
 import { useLoaderData, Link } from "react-router";
 import { PrismaClient } from "@prisma/client";
-import Button from "../../components/atoms/Button";
-import AddToCart from "../../components/molecules/AddToCart";
+import Button from "../../components/atomic/atoms/Button";
+import AddToCart from "../../components/atomic/molecules/AddToCart";
 
 const prisma = new PrismaClient();
 
