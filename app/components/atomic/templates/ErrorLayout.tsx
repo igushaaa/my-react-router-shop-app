@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Text, Button, Card } from "../atoms";
 
 export interface ErrorLayoutProps {
@@ -23,7 +23,7 @@ export default function ErrorLayout({
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Card variant="elevated" className="p-8 text-center">
           {statusCode && (
-            <Text as="h1" size="6xl" weight="bold" color="danger" className="mb-4">
+            <Text as="h1" size="4xl" weight="bold" color="danger" className="mb-4">
               {statusCode}
             </Text>
           )}

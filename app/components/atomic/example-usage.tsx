@@ -120,7 +120,7 @@ export function OrganismsExample() {
       <ProductList 
         items={products}
         isLoading={false}
-        error={null}
+        error={undefined}
       />
     </div>
   );
@@ -159,7 +159,7 @@ export function PagesExample() {
     <HomePage 
       featuredProducts={featuredProducts}
       isLoading={false}
-      error={null}
+      error={undefined}
     />
   );
 }

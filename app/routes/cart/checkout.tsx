@@ -1,17 +1,13 @@
 import type { ActionFunctionArgs } from "react-router";
 import { PrismaClient } from "@prisma/client";
-import { getUser } from "../../auth.server";
-import { redirect } from "react-router";
+import { requireAuth } from "../../auth.server";
 
 const prisma = new PrismaClient() as any;
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
-    // 1️⃣ Отримуємо користувача із сесії
-    const user = await getUser(request);
-    if (!user) {
-      return Response.json({ error: "Not authenticated" }, { status: 401 });
-    }
+    // 1️⃣ Переконуємось, що користувач авторизований
+    const user = await requireAuth(request);
 
     // 2️⃣ Отримуємо всі товари з кошика КОНКРЕТНОГО користувача
     const cartItems = await prisma.cartItem.findMany({
@@ -45,8 +41,8 @@ export async function action({ request }: ActionFunctionArgs) {
       },
     });
 
-    // 5️⃣ Перенаправляємо на сторінку замовлень
-    return redirect("/account/orders");
+    // 5️⃣ Повертаємо JSON успіху для fetcher
+    return Response.json({ success: true, orderId: order.id });
   } catch (err) {
     console.error("Checkout failed:", err);
     return Response.json({ error: "Server error" }, { status: 500 });

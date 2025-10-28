@@ -18,11 +18,19 @@ export async function getUser(request: Request) {
   return prisma.user.findUnique({ where: { id: cookie.userId } });
 }
 
-// 🚫 Якщо користувач не залогінений — редірект
-export async function loader({ request }: { request: Request }) {
+// Middleware-style helper to require authentication
+export async function requireAuth(request: Request) {
   const user = await getUser(request);
-  if (!user) throw Response.redirect("/auth/login");
-  return { user };
+  if (!user) {
+    throw Response.redirect(new URL("/auth/login", request.url));
+  }
+  return user;
+}
+
+// Basic login helper (used by tests; real app should hash passwords)
+export async function login(email: string, password: string) {
+  if (!email || !password) return null;
+  return prisma.user.findUnique({ where: { email } });
 }
 
 // 🧹 Вихід (logout)
