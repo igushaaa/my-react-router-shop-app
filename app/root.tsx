@@ -7,8 +7,9 @@ import {
   Scripts,
   useNavigation,
 } from "react-router";
-import { clientMiddleware } from "./middleware/client";
+// // import { clientMiddleware as middleware } from "./middleware/client";
 import "./app.css";
+import { Analytics } from "./components/atomic/organisms";
 
 import {
   isRouteErrorResponse,
@@ -78,6 +79,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         )}
 
+        <Analytics />
         {children}
 
         <ScrollRestoration />
@@ -91,7 +93,7 @@ export default function App() {
   return <Outlet />;
 }
 
-export { clientMiddleware };
+// export const clientMiddleware = middleware;
 
 // Глобальний fallback при гідратації
 export function HydrateFallback() {

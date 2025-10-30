@@ -82,12 +82,10 @@ export const errorHandler: ClientMiddleware = ({ request, response, context }) =
   return { request, response, context };
 };
 
-// Комбінований middleware
+// Спрощений middleware для початку
 export const clientMiddleware: ClientMiddleware = (args) => {
-  let result = navigationLogger(args);
-  result = performanceMetrics(result);
-  result = userAnalytics(result);
-  result = errorHandler(result);
+  // Простий лог
+  console.log("🚀 Client middleware:", args.request?.url);
   
-  return result;
+  return args;
 };

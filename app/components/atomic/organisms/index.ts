@@ -6,6 +6,7 @@ export { default as Navigation } from './Navigation';
 export { default as Cart } from './Cart';
 export { default as OrderList } from './OrderList';
 export { default as ProductFilters } from './ProductFilters';
+export { default as Analytics } from './Analytics';
 
 export type { ProductListProps } from './ProductList';
 export type { NavigationProps } from './Navigation';
